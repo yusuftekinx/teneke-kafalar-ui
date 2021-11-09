@@ -10,8 +10,6 @@ import SpinnerSVG from '../../img/spinner.svg'
 import Modal from 'react-modal';
 import { createVoteRequest } from '../../Service/Vote/createVoteRequest';
 import { toast } from 'react-toastify';
-import 'semantic-ui-css/semantic.min.css'
-import { Form, Progress, Radio } from 'semantic-ui-react';
 
 
 

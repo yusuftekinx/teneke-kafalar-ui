@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-import { Sidebar } from 'semantic-ui-react';
 import IO, { connect } from 'socket.io-client'
 import InputWıthIcon from '../Auth/InputWithIcon/InputWithIcon'
 import { toast } from 'react-toastify'
