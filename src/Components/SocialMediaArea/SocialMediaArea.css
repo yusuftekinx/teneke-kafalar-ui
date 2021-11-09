@@ -1,0 +1,45 @@
+.sm-component .component-header h3{
+    color: #14279B;
+}
+
+
+.media{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 60px;
+    cursor: pointer;
+    color: black;
+}
+
+.media .image img{
+    width: 64px;
+    height: 64px;
+    transition: 1s transform;
+}
+
+.media .image img:hover{
+    transform: rotateX(360deg);
+
+}
+
+.media .smName{
+    font-size: 21px;
+    font-weight: bold;
+    position: relative;
+    top: 20px;
+
+}
+
+.smLinks{
+    text-decoration: none;
+}
+
+
+.sm-component .component-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

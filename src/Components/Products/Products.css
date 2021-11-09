@@ -1,0 +1,20 @@
+.products-component{
+    width: 100%;
+    height: 500px;
+    /* background: url('../../img/products-background-image.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; */
+}
+
+.products-component .component-header h3{
+    font-size: 24px;
+    position: relative;
+    color: #14279B;
+}
+
+.products-component .component-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

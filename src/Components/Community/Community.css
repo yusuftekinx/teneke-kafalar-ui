@@ -1,0 +1,206 @@
+
+
+.community-component .community-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.community-component .community-top .community-header{
+    margin-left: 15px;
+}
+
+.community-component .community-top .createCommunityBtn{
+    font-size: 13px;
+    margin-right: 15px;
+    width: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.closeModalButton{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.createButton{
+    margin-top: 20px;
+    float: right;
+}
+
+
+
+.listOfCommunity{
+    width: 100%;
+    display: flex;
+}
+
+.listOfCommunity .myMembersCommunity{
+    width: 28%;
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 525px;
+}
+
+.listOfCommunity .community-data{
+    width: 68%;
+    margin-left: auto;
+}
+
+.listOfCommunity .myMembersCommunity .communityCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    width: 95%;
+    background-color: #E1E5EA;
+    margin-left: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    margin-top: 5px;
+    transition: 0.4s;
+    text-decoration: none;
+    z-index: 4;
+}
+
+.listOfCommunity .myMembersCommunity .communityCard:hover{
+    background-color: #c1c5c9;
+
+}
+
+.listOfCommunity .myMembersCommunity .communityCard .communityImage{
+    position: absolute;
+    left: 10px;
+}
+.listOfCommunity .myMembersCommunity .communityCard .communityImage img{
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+    margin-right: 15px;
+}
+
+.listOfCommunity .myMembersCommunity .communityCard .communityName{
+    padding: 0px;
+    margin: 0px;
+    margin-left: 15px;
+    
+}
+
+.listOfCommunity .myMembersCommunity .communityCard .createdDate{
+    font-size: 12px;
+    position: absolute;
+    color: black;
+    right: 10px;
+    bottom: 5px;
+    opacity: 0.5;
+
+}
+
+.listOfCommunity .myMembersCommunity .communityCard .communityName p {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.three-dot-icon{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 5px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+.three-dot{
+    width: 20px;
+    height: 20px;
+    color: black;
+}
+.communityOptions{
+    width: 64px;
+    height: 24px;
+    padding-top: 4px;
+    border-radius: 4px;
+    position: absolute;
+    right: 0px;
+    top: 20px;
+    z-index: 5;
+}
+.communityOptions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    list-style-type: none;
+    background-color: #F4EEED;
+    padding: 5px;
+    animation: optionsAni 0.4s 1;
+}
+@keyframes optionsAni {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+#options-delete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FF4646;
+    width: 100%;
+    padding: 4px;
+}
+#options-delete span{
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+#options-delete i{
+    position: absolute;
+    left: 6px;
+}
+#options-delete:hover{
+    background-color: #D9E4DD;
+}
+
+
+@media only screen and (max-width: 700px) {
+    .listOfCommunity .myMembersCommunity{
+        width: 100px;
+    }
+    .listOfCommunity .community-data{
+        width: 400px;
+        margin-left: 100px;
+    }
+    .listOfCommunity .myMembersCommunity .communityCard .communityName{
+        display: none;
+    }
+    .listOfCommunity .myMembersCommunity .communityCard{
+        width: 64px;
+        height: 64px;
+        border-bottom-left-radius: 100%;
+        border-bottom-right-radius: 100%;
+        border-top-left-radius: 100%;
+    }
+    .listOfCommunity .myMembersCommunity .communityCard .communityImage img{
+        width: 48px;
+        height: 48px;
+        border-radius: 100%;
+        margin-right: 15px;
+        margin-top: 15px;
+    }
+    .listOfCommunity .myMembersCommunity .communityCard .createdDate{
+        display: none;
+    }
+}

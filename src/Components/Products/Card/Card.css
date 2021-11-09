@@ -1,0 +1,41 @@
+.card{
+    width: 305px;
+    height: 225px;
+    border-radius: 13px;
+    margin: 20px;
+    margin-top: 30px;
+    background-color: white;
+    border: 1px solid lightgray;
+}
+
+.card .image{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card .image img{
+    position: relative;
+    width: 100%;
+    border-top-right-radius: 13px;
+    border-top-left-radius: 13px;
+}
+
+.card .header-and-content{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.card .header-and-content .header{
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.incele-button{
+    position: relative;
+    top: 10px;
+    text-decoration: none;
+}

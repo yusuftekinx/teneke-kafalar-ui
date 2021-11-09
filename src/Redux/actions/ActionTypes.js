@@ -1,0 +1,6 @@
+
+
+export const USER_SAVE_DATA = "USER_SAVE_DATA"
+export const WINDOW_WIDTH = "WINDOW_WIDTH";
+export const SAVE_ALL_COMMUNITIES = "SAVE_ALL_COMMUNITIES"
+export const SAVE_USER_TOKEN = "SAVE_USER_TOKEN";

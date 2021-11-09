@@ -1,0 +1,33 @@
+.home-component{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    position: relative;
+}
+
+.home-left{
+    background-color: #222222;
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+}
+
+.home-right{
+    position: relative;
+    width: 100%;
+    padding-left: 250px;
+    margin-left: auto;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .home-left{
+        width: 50px;
+    }
+    .home-right{
+        padding-left: 50px;
+    }
+}

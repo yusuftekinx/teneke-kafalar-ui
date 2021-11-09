@@ -1,0 +1,67 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ceviche+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap');
+
+
+.tkButton{
+    background-color: #608AF5;
+    color: white;
+    border-radius: 4px;
+    width: 120px;
+    padding: 7px 15px;
+    outline: none;
+    border: none;
+    transition: 0.4s;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+
+}
+.tkButton:hover{
+    background-color:#4976e9;
+}
+
+.poppinsText{
+    font-family: 'Poppins', sans-serif;
+}
+
+.openSansText{
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+.mt10{
+    margin-top: 10px;
+}
+.mt20{
+    margin-top: 20px;
+}
+
+.ml10{
+    margin-left: 10px;
+}
+
+.cursiveText{
+    font-family: 'Ceviche One', cursive;
+
+}
+
+.zenKakuText{
+    font-family: 'Zen Kaku Gothic Antique', sans-serif;
+}
+
+.monserratText{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.dongleText{
+    font-family: 'Dongle', sans-serif;
+}
+
+.zenText{
+    font-family: 'Zen Kurenaido', sans-serif;
+}
