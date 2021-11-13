@@ -1,7 +1,11 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Teneke Kafalar",
+  "name": "Teneke Kafalar Web Uygulaması",
   "icons": [
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 232c0c86863e20f86bf490d2e4ec97106980a63f
     {
       "src": "logo192.png",
       "type": "image/png",
