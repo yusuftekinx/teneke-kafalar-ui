@@ -17,7 +17,7 @@ function InputWithIcon({ required=true,htmlFor,onChangeEvent ,icon, placeholder,
         <div className="special-input">
             <label className="input-label" htmlFor={htmlFor}>
                 <span className="icon">{icon}</span>
-                <input value = {props.value} autoComplete = "off" onChange = {changeEvent} className="openSansText" required={required} id={htmlFor} type={type} placeholder={placeholder} />
+                <input value = {props.value} autoComplete = "off" style = {props.style} onChange = {changeEvent} className="openSansText" required={required} id={htmlFor} type={type} placeholder={placeholder} />
                 {
                     isPasswordInput === true ? <span onClick={changePasswordState} className="eye-icon">{passStatus === true ? <AiOutlineEyeInvisible title = "Şifre'yi Gizle" /> :<AiOutlineEye title= "Şifre'yi Göster" />}</span> : null
                 }

@@ -22,7 +22,9 @@ import CommunityContent from './Components/Community/CommunityContent/CommunityC
 import io from 'socket.io-client'
 import LiveNotification from './Components/LiveNotificaion/LiveNotification';
 import { API_HOST } from './Service/settings';
-const socket = io(`${API_HOST}/socket-vote`)
+const voteSocket = io(`${API_HOST}/socket-vote`)
+const notificationSocket = io(`${API_HOST}/notification`)
+const joinCommunitySocket = io(`${API_HOST}/joinCommunity`)
 
 function App(props) {
 
@@ -73,12 +75,12 @@ function App(props) {
     {
       id: 4,
       path: '/community',
-      component: <Home component = {<Community />} />,
+      component: <Home component = {<Community socket = {joinCommunitySocket} />} />,
     },
     {
       id:5,
       path:'/vote',
-      component:<Home component = {<Vote socket = {socket} />} />,
+      component:<Home component = {<Vote socket = {voteSocket} />} />,
       loading:false
     },
     {
@@ -102,7 +104,7 @@ function App(props) {
     {
       id:9,
       path:'/notification',
-      component:<Home component = {<LiveNotification role = {props.user.role} />} />,
+      component:<Home component = {<LiveNotification io = {notificationSocket} role = {props.user.role} />} />,
       loading:false 
     }
   ]

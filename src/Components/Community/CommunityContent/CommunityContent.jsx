@@ -6,7 +6,8 @@ import { imageApiUrl } from '../../../Service/settings'
 import { IoMdImages } from 'react-icons/all'
 import { uploadProfileImageRequest } from '../../../Service/Community/updateProfileImage'
 import { toast } from 'react-toastify'
-
+import UserIcon from '../../../img/user.png'
+import { BiDotsVertical } from 'react-icons/all'
 export const CommunityContent = (props) => {
 
 
@@ -16,17 +17,15 @@ export const CommunityContent = (props) => {
     useEffect(async () => {
         const filterCommunity = await props.communities.filter(community => community.slugName === params.slugName);
         await setSingleCommunity(filterCommunity[0]);
-    })
 
-
+    }, [params.slugName])
     const formData = new FormData();
-
     let uploadImageFile = async (e) => {
         formData.append('communityImage', e.target.files[0])
         await uploadProfileImageRequest(formData, props.token, singleCommunity._id).then(response => {
             toast.success(response.data.message);
         }).catch(err => {
-            console.log(err)
+            toast.error(err.response.data.message)
         })
     }
 
@@ -35,7 +34,7 @@ export const CommunityContent = (props) => {
             <h3 className="communityName">{singleCommunity?.communityName}</h3><br></br>
             <div className="communityImageAndContent">
                 {
-                    props.user.role === 'admin' ? <input title="Topluluk Profil Resmini Değiştir" onChange={uploadImageFile} type="file" className="inputImageFile" /> : null
+                    props.user.role === 'admin' ? <input title="Topluluk Profil Resmini Değiştir" onChange={uploadImageFile} type="file" className="inputImageFile" enctype="multipart/form-data" /> : null
                 }
                 <img alt={'Community Profile Image'} className="communityImage" draggable="false" src={`${imageApiUrl}/${singleCommunity?.communityProfileImage}`}></img>
                 {
@@ -44,7 +43,30 @@ export const CommunityContent = (props) => {
                 }
                 <p className="zenText communityContentText">{singleCommunity?.communityContent}</p>
             </div>
-
+            <div className="content-center">
+                <div className="message-area">
+                    Community Messages
+                </div>
+                <div className="member-area">
+                    <h3>Üyeler</h3>
+                    <hr style={{ width: '60%' }}></hr>
+                    {
+                        singleCommunity?.members.map(member => (
+                            <div className="singleMembers">
+                                <span className="user-profileImage">
+                                    <img draggable="false" src={UserIcon}></img>
+                                </span>
+                                <span className="members-username">
+                                    <p className="poppinsText">{member}</p>
+                                </span>
+                                <span className="members-options" title="Düzenle">
+                                    <BiDotsVertical />
+                                </span>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
 
         </div>
     )

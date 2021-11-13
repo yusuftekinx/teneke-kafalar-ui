@@ -55,7 +55,7 @@ function Login(props) {
             }, 2000);
         }).catch(err => {
             setTimeout(() => {
-                toast.error(err.response.data.message, {
+                toast.error(err.response?.data.message, {
                     position: "top-right",
                     autoClose: 3000,
                     hideProgressBar: false,

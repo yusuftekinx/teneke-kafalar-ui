@@ -44,25 +44,48 @@ function Vote({ user, socket }) {
         socket.emit('isLiveVote', '')
     }, [])
     useEffect(() => {
+
         socket.on('liveVotesClient', async (liveVote) => {
-            if (liveVote.length > 0) {
-                const { voteData } = await liveVote[0];
+            if (liveVote.liveVotes.length > 0) {
+                const { voteData } = await liveVote.liveVotes[0];
                 setLiveVote(voteData)
-                ReactDOM.render(<CreateVoteComponent votename={voteData.voteName} voteusercount={voteData.usersCount} option1={voteData.opt1} option2={voteData.opt2} option3={voteData.opt3} option4={voteData.opt4} />, document.getElementById('create-vote-area'))
+                ReactDOM.render(<div>
+                    <CreateVoteComponent
+                        votename={voteData.voteName}
+                        voteusercount={liveVote.countJoinedUsers}
+                        options={voteData.options}
+                        isJoined={liveVote.users?.indexOf(user.username) === -1 ? false : true}
+                    />
+                </div>, document.getElementById('create-vote-area'))
             }
         })
-
         return () => {
-            console.log(liveVote)
+            socket = null
         }
     }, [])
 
 
     useEffect(() => {
-        console.log(selectedOption)
+        socket.emit('votingProcess', {
+            username: user.username,
+            selectedOption
+        })
     }, [selectedOption])
 
-    let CreateVoteComponent = ({ votename, voteDate, voteusercount, isJoined, option1, option2, option3, option4 }) => {
+    let onSetSelectedOption = (e) => {
+        setSelectedOption(e.target.value)
+    }
+
+
+    let finishedVote = (e) => {
+        socket.emit('FinishVote', '');
+        toast.success('Oylama sonlandırıldı')
+        document.querySelector('.finishedButton').remove();
+        setLiveVote(null);
+        e.preventDefault()
+    }
+
+    let CreateVoteComponent = ({ votename, voteusercount, isJoined, options }) => {
         return (
             <div className="vote-content">
                 <div className="single-vote openSansText">
@@ -70,58 +93,54 @@ function Vote({ user, socket }) {
                         {votename}
                     </div>
                     <div className="joined-count-user">
-                        {voteusercount}0 &nbsp;<FaUserAlt className="icon" />
+                        {voteusercount}&nbsp;<FaUserAlt className="icon" />
                     </div>
                 </div>
                 <div className="vote-options">
-                    <form>
-                        <div>
-                            <input disabled={selectedOption !== '' ? true : false} type="radio" onChange = {() => {setSelectedOption(option1)}} name="voteGroup" value={option1} />{option1}
-
-                        </div>
-                        <div><input disabled={selectedOption !== '' ? true : false} type="radio" onChange = {() => {setSelectedOption(option2)}} name="voteGroup" value={option2} />{option2}</div>
-                        {
-                            option3 !== '' ? <div><input disabled={selectedOption !== '' ? true : false} type="radio" onChange = {() => {setSelectedOption(option3)}} name="voteGroup" value={option3} />{option3}</div> : null
-                        }
-                        {
-                            option4 !== '' ? <div><input disabled={selectedOption !== '' ? true : false} type="radio" onChange = {() => {setSelectedOption(option4)}} name="voteGroup" value={option4} />{option4}</div> : null
-                        }
-                    </form>
+                    <ul>
+                        <form onSubmit={finishedVote}>
+                            {
+                                options.map(opt => (
+                                    opt.option !== '' ? <li className="poppinsText"><input required disabled={isJoined === true ? true : false} type="radio" onChange={onSetSelectedOption} name="voteGroup" value={opt.option} />{opt.option} - (%{voteusercount !== 0 ? (opt.count / voteusercount * 100).toFixed(0) : 0})</li> : null
+                                ))
+                            }
+                            <br></br>
+                            {
+                                user.role === 'admin' ? <button type="submit" className="tkButton finishedButton">Sonlandır</button> : null
+                            }
+                        </form>
+                    </ul>
                 </div>
+                {
+                    isJoined === true ? <small>Oy Kullandın</small> : null
+                }
+
             </div>
         )
     }
 
 
-    useEffect(() => {
-        socket.on('sendLiveVoteDataClient', (data) => {
-            const { voteData } = data;
-            ReactDOM.render(<CreateVoteComponent votename={voteData.voteName} voteusercount={voteData.usersCount} />, document.getElementById('create-vote-area'))
-        }, [])
-        socket.on('liveVoteDataOwner', (data) => {
-            if (data.success === true) {
-                toast.success('Oylama başladı...');
-                const { voteData } = data.data;
-                setOpt1('')
-                setOpt2('')
-                setOpt3('')
-                setOpt4('')
-                setVoteName('')
-                closeModal();
-                ReactDOM.render(<CreateVoteComponent votename={voteData.voteName} voteusercount={voteData.usersCount} />, document.getElementById('create-vote-area'))
-
-            }
-        })
-    }, [])
-
     const sendVoteRequest = async (e) => {
         let formData = {
             voteName,
-            opt1,
-            opt2,
-            opt3,
-            opt4,
-            createdData: Date.now(),
+            options: [
+                {
+                    option: opt1,
+                    count: 0
+                },
+                {
+                    option: opt2,
+                    count: 0
+                },
+                {
+                    option: opt3,
+                    count: 0
+                },
+                {
+                    option: opt4,
+                    count: 0
+                },
+            ],
             owner: user.username
         }
 
@@ -129,7 +148,13 @@ function Vote({ user, socket }) {
             voteOwner: user.username,
             voteData: formData
         })
-
+        toast.success('Oylama başladı...')
+        setOpt1('')
+        setOpt2('')
+        setOpt3('')
+        setOpt4('')
+        setVoteName('')
+        closeModal();
         e.preventDefault();
 
     }
@@ -189,7 +214,7 @@ function Vote({ user, socket }) {
             <div className="vote-top">
                 <h2 className="zenKakuText vote-header">Oylama</h2>
                 {
-                    user.role === 'admin' ? <button onClick={openModal} className="tkButton createVoteBtn"><FaPlus />&nbsp;&nbsp;Yeni</button> : null
+                    user.role === 'admin' ? liveVote === null ? <button onClick={openModal} className="tkButton createVoteBtn"><FaPlus />&nbsp;&nbsp;Yeni</button> : <button onClick={(e) => { toast.success('Şuan devam eden bir oylama var.') }} className="tkButton createVoteBtn"><FaPlus />&nbsp;&nbsp;Yeni</button> : null
                 }
 
                 <Modal

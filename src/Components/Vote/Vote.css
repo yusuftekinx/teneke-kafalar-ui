@@ -53,3 +53,15 @@
 .vote-content .vote-options{
     width: 100%;
 }
+
+.vote-content .vote-options ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    list-style-type: none;
+}
+
+.vote-content .vote-options ul li{
+    align-self: flex-start;
+}
